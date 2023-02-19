@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>[[${pageTitle}]]</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
+
+</head>
+<body>
+<div class="container-fluid">
+    <div class="text-center"><h2>[[${pageTitle}]]</h2></div>
+    <form th:action="@{/knoten/save}" method="post" th:object="${knoten}"
+    style="max-width: 500px; margin: 0 auto;">
+        <input type="hidden" th:field="*{id}">
+        <div class="border border-secondary rounded p-3">
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Nummer:</label>
+                <div class="col-sm-8 ">
+                    <input type="number" th:field="*{nr}" class="form-input" required minlength="0" maxlength="5"/>
+
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Name:</label>
+                <div class="col-sm-8 ">
+                    <input type="text" th:field="*{name}" class="form-input" required minlength="3" maxlength="50"/>
+
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Beschreibung:</label>
+                <div class="col-sm-8 ">
+                    <input type="text" th:field="*{beschr}" class="form-input" required minlength="0" maxlength="200"/>
+
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Dauer:</label>
+                <div class="col-sm-8 ">
+                    <input type="number" th:field="*{dauer}" class="form-input" required minlength="1" maxlength="10"/>
+
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Vorgaenger:</label>
+                <div class="col-sm-8 ">
+                    <input type="number" th:field="*{vorgaenger}" class="form-input" required minlength="0" maxlength="5"/>
+
+                </div>
+            </div>
+            <!-- Button trigger modal -->
+            <!--
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                Launch demo modal
+            </button>
+
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            ...
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+-->
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary m-2">Speichern</button>
+                <button type="button" class="btn btn-secondary m-2" onclick="cancelForm()">Abbrechen</button>
+            </div>
+        </div>
+
+
+    </form>
+</div>
+<script type="text/javascript">
+    function cancelForm(){
+        window.location = "[[@{/knoten}]]";
+    }
+</script>
+
+</body>
+</html>
