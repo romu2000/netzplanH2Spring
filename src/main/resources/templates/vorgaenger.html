@@ -42,11 +42,19 @@
                 </tbody>
             </table>
         </div>
-        <button class="btn btn-success mr-2">Hinzufügen</button>
-        <button class="btn btn-danger mr-2">Keine Vorgänger</button>
 
+        <div class="border border-secondary rounded p-3">
+        <button class="btn btn-success mr-2">Hinzufügen</button>
+        </div>
 
     </form>
+    <div class="text-center"><button class="btn btn-danger mr-2" onclick="cancelForm()">Test Vorgänger</button></div>
 </div>
+<script type="text/javascript">
+    function cancelForm(){
+        window.location = "[[@{/knoten}]]";
+    }
+</script>
 </body>
+
 </html>

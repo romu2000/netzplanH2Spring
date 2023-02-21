@@ -1,18 +1,26 @@
 package com.romu2000.netzplanH2Spring.model;
 
 
-import org.springframework.stereotype.Repository;
-
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-@Table(name = "knoten")
-@SecondaryTable(name ="vorgaenger", pkJoinColumns = @PrimaryKeyJoinColumn(name = "KID"))
+@Entity(name = "knoten")
+@Table(name = "tbl_knoten")
 public class Knoten {
+    public Knoten() {
+    }
+
+    public Knoten(Integer nr, String name, String beschr, Integer dauer, List<Integer> vorgaenger) {
+        this.nr = nr;
+        this.name = name;
+        this.beschr = beschr;
+        this.dauer = dauer;
+        this.vorgaenger = vorgaenger;
+    }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     private Integer nr;
@@ -27,7 +35,7 @@ public class Knoten {
     private Integer dauer;
 
     @ElementCollection
-    @CollectionTable(name = "VORGAENGER", joinColumns = @JoinColumn(name = "KID"))
+    @CollectionTable(name = "tbl_VORGAENGER", joinColumns = @JoinColumn(name = "KID"))
     @Column(name = "VID")
     private List<Integer> vorgaenger;
 
@@ -79,6 +87,7 @@ public class Knoten {
                 ", nr=" + nr +
                 ", name='" + name + '\'' +
                 ", beschr='" + beschr + '\'' +
+                ", vorgaenger='" + vorgaenger + '\'' +
                 ", dauer=" + dauer +
                 '}';
     }
@@ -87,8 +96,9 @@ public class Knoten {
         return vorgaenger;
     }
 
-    public void setVorgaenger(List<Integer> vorgaenger) {
-        this.vorgaenger = vorgaenger;
+    public void setVorgaenger(List<Integer> newVorgaenger) {
+
+        this.vorgaenger = new ArrayList<>(newVorgaenger);
     }
 }
 

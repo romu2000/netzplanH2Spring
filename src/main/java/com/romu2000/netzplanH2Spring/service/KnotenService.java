@@ -3,6 +3,7 @@ package com.romu2000.netzplanH2Spring.service;
 import com.romu2000.netzplanH2Spring.model.Knoten;
 import com.romu2000.netzplanH2Spring.repository.KnotenRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
@@ -22,10 +23,16 @@ public class KnotenService {
         return (List<Knoten>) kRepo.findAll();
     }
 
+    public List<Knoten> listDistinctAllKnoten(){
+       return (List<Knoten>) kRepo.findDistinctIds();
+    }
+
+
     public void save(Knoten knoten) {
         kRepo.save(knoten);
     }
     public Knoten get(Integer id) throws KnotenNotFoundException {
+
         Optional<Knoten> result = kRepo.findById(id);
         if (result.isPresent()) {
             return result.get();
@@ -41,5 +48,7 @@ public class KnotenService {
             kRepo.deleteById(id);
         }
     }
+
+
 
 }

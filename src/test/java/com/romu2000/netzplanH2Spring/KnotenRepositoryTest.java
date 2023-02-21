@@ -10,6 +10,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureDataJpa;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.Rollback;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.Optional;
 
 @DataJpaTest
@@ -27,9 +29,9 @@ public class KnotenRepositoryTest {
         knoten.setNr(1);
 
         Knoten savedKnoten = repo.save(knoten);
-
-
     }
+
+
 
     @Test
     public void testListAll(){
@@ -50,8 +52,5 @@ public class KnotenRepositoryTest {
         repo.save(knoten);
 
         Knoten updatedKnoten = repo.findById(knotenId).get();
-
-
-
     }
 }

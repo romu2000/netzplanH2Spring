@@ -22,6 +22,7 @@
             <thead class="thead-dark">
             <tr>
                 <th>ID</th>
+                <th>Nr.</th>
                 <th>Name</th>
                 <th>Beschreibung</th>
                 <th>Dauer</th>
@@ -33,6 +34,7 @@
             <th:block th:each="knoten : ${listKnoten}">
                 <tr>
                     <td>[[${knoten.id}]]</td>
+                    <td>[[${knoten.nr}]]</td>
                     <td>[[${knoten.name}]]</td>
                     <td>[[${knoten.beschr}]]</td>
                     <td>[[${knoten.dauer}]]</td>
