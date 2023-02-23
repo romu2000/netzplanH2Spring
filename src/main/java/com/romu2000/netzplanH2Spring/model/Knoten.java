@@ -1,17 +1,28 @@
 package com.romu2000.netzplanH2Spring.model;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.stereotype.Component;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name = "knoten")
-@Table(name = "tbl_knoten")
+@Table(name = "tbl_knot")
+@NamedQuery(
+        name = "Knoten.findOhneId",
+        query = "SELECT k from knoten k"
+)
 public class Knoten {
+
+
     public Knoten() {
     }
 
-    public Knoten(Integer nr, String name, String beschr, Integer dauer, List<Integer> vorgaenger) {
+    @Autowired
+    public Knoten(int nr, String name, String beschr, int dauer, List<Integer> vorgaenger) {
         this.nr = nr;
         this.name = name;
         this.beschr = beschr;
@@ -20,10 +31,10 @@ public class Knoten {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-    private Integer nr;
+    private int nr;
 
     @Column(nullable = false,unique = true)
     private String name;
@@ -32,15 +43,76 @@ public class Knoten {
     private String beschr;
 
     @Column(length = 10)
-    private Integer dauer;
+    private int dauer;
 
     @ElementCollection
-    @CollectionTable(name = "tbl_VORGAENGER", joinColumns = @JoinColumn(name = "KID"))
+    @CollectionTable(name = "tbl_VORG", joinColumns = @JoinColumn(name = "KID"))
     @Column(name = "VID")
     private List<Integer> vorgaenger;
 
+    // WORKAROUND zur Berechnung der Knoten -- unschöne Lösung
+    @Transient
+    private int faz;
+    @Transient
+    private int fez;
+    @Transient
+    private int sez;
+    @Transient
+    private int saz;
+    @Transient
+    private int gP;
+    @Transient
+    private int fP;
 
-    public Integer getId() {
+    public int getFaz() {
+        return faz;
+    }
+
+    public void setFaz(int faz) {
+        this.faz = faz;
+    }
+
+    public int getFez() {
+        return fez;
+    }
+
+    public void setFez(int fez) {
+        this.fez = fez;
+    }
+
+    public int getSez() {
+        return sez;
+    }
+
+    public void setSez(int sez) {
+        this.sez = sez;
+    }
+
+    public int getSaz() {
+        return saz;
+    }
+
+    public void setSaz(int saz) {
+        this.saz = saz;
+    }
+
+    public int getgP() {
+        return gP;
+    }
+
+    public void setgP(int gP) {
+        this.gP = gP;
+    }
+
+    public int getfP() {
+        return fP;
+    }
+
+    public void setfP(int fP) {
+        this.fP = fP;
+    }
+
+    public int getId() {
         return id;
     }
 
@@ -48,7 +120,7 @@ public class Knoten {
         this.id = id;
     }
 
-    public Integer getNr() {
+    public int getNr() {
         return nr;
     }
 
@@ -72,7 +144,7 @@ public class Knoten {
         this.beschr = beschr;
     }
 
-    public Integer getDauer() {
+    public int getDauer() {
         return dauer;
     }
 
@@ -100,6 +172,8 @@ public class Knoten {
 
         this.vorgaenger = new ArrayList<>(newVorgaenger);
     }
+
+
 }
 
 

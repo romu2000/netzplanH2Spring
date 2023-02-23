@@ -3,14 +3,7 @@ package com.romu2000.netzplanH2Spring.service;
 import com.romu2000.netzplanH2Spring.model.Knoten;
 import com.romu2000.netzplanH2Spring.repository.KnotenRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
-import java.nio.file.attribute.UserPrincipalNotFoundException;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,14 +12,19 @@ public class KnotenService {
     @Autowired
     private KnotenRepository kRepo;
 
+
     public List<Knoten> listAllKnoten(){
+
         return (List<Knoten>) kRepo.findAll();
+    }
+
+    public List<Knoten> ohneId(){
+        return kRepo.findOhneId();
     }
 
     public List<Knoten> listDistinctAllKnoten(){
        return (List<Knoten>) kRepo.findDistinctIds();
     }
-
 
     public void save(Knoten knoten) {
         kRepo.save(knoten);

@@ -4,51 +4,74 @@
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js">
     </script>
-
-    <!-- Including Bootstrap JS -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js">
     </script>
 </head>
 <body>
-    <div class="container-fluid text-center">
-        <div><h2>Knotenliste</h2></div>
-        <div class="m-2">
-            <a class="h3" th:href="@{/knoten/neu}">Neuer Knoten</a>
-        </div>
-        <div id="alert" th:if="${message}" class="alert alert-success text-center fade show">
-            [[${message}]]
-        </div>
-        <table class="table table-bordered">
-            <thead class="thead-dark">
-            <tr>
-                <th>ID</th>
-                <th>Nr.</th>
-                <th>Name</th>
-                <th>Beschreibung</th>
-                <th>Dauer</th>
-                <th>Vorgänger</th>
-                <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            <th:block th:each="knoten : ${listKnoten}">
-                <tr>
-                    <td>[[${knoten.id}]]</td>
-                    <td>[[${knoten.nr}]]</td>
-                    <td>[[${knoten.name}]]</td>
-                    <td>[[${knoten.beschr}]]</td>
-                    <td>[[${knoten.dauer}]]</td>
-                    <td>[[${knoten.vorgaenger}]]</td>
-                    <td>
-                        <a class="h4 mr-2 md-6" th:href="@{'/knoten/edit/' + ${knoten.id}}">Bearbeiten</a>
-                        <a class="h4 mr-2 md-6" th:href="@{'/knoten/delete/' + ${knoten.id}}">Löschen</a>
-                    </td>
-                </tr>
-            </th:block>
-            </tbody>
-        </table>
+<div class="container-fluid text-center">
+    <div><h2>Knotenliste</h2></div>
+    <div id="alert" th:if="${message}" class="alert alert-success text-center fade show">
+        [[${message}]]
     </div>
-    <script type="text/javascript">
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+        <tr>
+            <th>ID</th>
+            <th>Nr.</th>
+            <th>Name</th>
+            <th>Beschreibung</th>
+            <th>Dauer</th>
+            <th>Vorgänger</th>
+            <th>FAZ</th>
+            <th>FEZ</th>
+            <th>SAZ</th>
+            <th>SEZ</th>
+            <th>GP</th>
+            <th>FP</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <th:block th:each="knoten : ${listKnoten}">
+            <tr>
+                <td>[[${knoten.id}]]</td>
+                <td>[[${knoten.nr}]]</td>
+                <td>[[${knoten.name}]]</td>
+                <td>[[${knoten.beschr}]]</td>
+                <td>[[${knoten.dauer}]]</td>
+                <td>[[${knoten.vorgaenger}]]</td>
+                <td>[[${knoten.faz}]]</td>
+                <td>[[${knoten.fez}]]</td>
+                <td>[[${knoten.saz}]]</td>
+                <td>[[${knoten.sez}]]</td>
+                <td>[[${knoten.gP}]]</td>
+                <td>[[${knoten.fP}]]</td>
+
+                <td>
+                    <a class="btn btn-primary" th:href="@{'/knoten/edit/' + ${knoten.id}}">Bearbeiten</a>
+                    <a class="btn btn-danger" th:href="@{'/knoten/delete/' + ${knoten.id}}">Löschen</a>
+                </td>
+            </tr>
+        </th:block>
+        </tbody>
+    </table>
+    <div class="m-2">
+        <a class="btn btn-success btn-lg btn-block" th:href="@{/knoten/neu}">Neuen Knoten anlegen</a>
+    </div>
+</div>
+<div class="d-inline-flex p-2">
+    <div class="border border-secondary-rounded p-3">
+
+        <h2><div class="label label-info text-center">Projektinfo:</div></h2>
+        <div class="h4 text-center">
+            <label th:text="'Projektdauer: ' + ${projektDauer}"></label>
+        </div>
+        <div class="h4 text-center">
+            <label th:text="${mykritischerPfad}"></label>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
         setTimeout(function () {
             // Closing the alert
             $('#alert').fadeTo(500, 0).alert('close');

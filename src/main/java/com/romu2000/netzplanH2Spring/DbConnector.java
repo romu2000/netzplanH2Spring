@@ -5,7 +5,10 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 @SpringBootApplication
 public class DbConnector{
+
+
 	public static void main(String[] args) {
 		SpringApplication.run(DbConnector.class, args);
+
 	}
 }
